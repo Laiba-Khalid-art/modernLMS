@@ -1,0 +1,32 @@
+# Root .dockerignore — applies when build context is the project root
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Frontend build output
+frontend/dist/
+frontend/.vite/
+
+# Test artifacts
+playwright/node_modules/
+screenshots/
+reports/playwright-report/
+
+# Dev/IDE files
+.git/
+.gitignore
+*.md
+.env.example
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MCP event logs
+reports/mcp-events.json
+reports/jira-bugs.json

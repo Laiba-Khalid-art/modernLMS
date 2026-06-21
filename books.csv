@@ -1,0 +1,21 @@
+BookID,Title,Author,Category,Quantity,AvailableCopies
+1,Introduction to Algorithms,Thomas H. Cormen,Computer Science,5,3
+2,Clean Code,Robert C. Martin,Software Engineering,4,4
+3,The Pragmatic Programmer,Andrew Hunt,Software Engineering,3,2
+4,Operating System Concepts,Abraham Silberschatz,Computer Science,6,5
+5,Database System Concepts,Abraham Silberschatz,Database,4,2
+6,Computer Networks,Andrew S. Tanenbaum,Networking,5,5
+7,Artificial Intelligence,Stuart Russell,Artificial Intelligence,3,1
+8,Data Structures Using C,Reema Thareja,Computer Science,7,6
+9,Discrete Mathematics,Kenneth H. Rosen,Mathematics,4,3
+10,Engineering Mathematics,B.S. Grewal,Mathematics,8,7
+11,Digital Electronics,Morris Mano,Electronics,5,4
+12,Signals and Systems,Alan V. Oppenheim,Electronics,3,3
+13,Linear Algebra,Gilbert Strang,Mathematics,4,4
+14,Calculus,James Stewart,Mathematics,6,5
+15,Physics for Scientists,Raymond A. Serway,Physics,5,2
+16,Organic Chemistry,Paula Bruice,Chemistry,4,4
+17,Microeconomics,Paul Krugman,Economics,3,3
+18,Management Information Systems,Kenneth Laudon,Management,4,2
+19,Financial Accounting,Carl Warren,Accounting,5,5
+20,Business Communication,Mary Ellen Guffey,Business,3,2

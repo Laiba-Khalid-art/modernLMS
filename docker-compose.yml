@@ -1,0 +1,96 @@
+# ─── Library Management System — Docker Compose ────────────────────────────────
+# Usage:
+#   docker-compose up --build        First run (builds images + starts all)
+#   docker-compose up -d             Start in background
+#   docker-compose down              Stop all containers
+#   docker-compose down -v           Stop + delete MongoDB data volume
+#   docker-compose logs -f backend   Stream backend logs
+#
+# App URLs after startup:
+#   Frontend : http://localhost:3000
+#   Backend  : http://localhost:5000
+#   MongoDB  : localhost:27017
+
+services:
+
+  # ── MongoDB ──────────────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: lms_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: library_management
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - lms-network
+
+  # ── Backend (Node.js + Express) ───────────────────────────────────────────────
+  backend:
+    build:
+      context: .                  # ROOT as context — needed for CSV files + backend/
+      dockerfile: backend/Dockerfile
+    container_name: lms_backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # Override localhost MongoDB URI → Docker service name
+      MONGODB_URI: mongodb://mongo:27017/library_management
+      NODE_ENV: production
+      PORT: 5000
+      JWT_SECRET: ${JWT_SECRET:-lms_super_secret_jwt_key_2024_modernLMS}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
+      FINE_PER_DAY: ${FINE_PER_DAY:-5}
+      DUE_DAYS: ${DUE_DAYS:-14}
+      CLIENT_URL: http://localhost:3000
+      # Jira (optional — pass through from .env if set)
+      JIRA_BASE_URL: ${JIRA_BASE_URL:-}
+      JIRA_EMAIL: ${JIRA_EMAIL:-}
+      JIRA_API_TOKEN: ${JIRA_API_TOKEN:-}
+      JIRA_PROJECT_KEY: ${JIRA_PROJECT_KEY:-KAN}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - lms-network
+
+  # ── Frontend (React + Vite → Nginx) ──────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lms_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - lms-network
+
+# ── Volumes ────────────────────────────────────────────────────────────────────
+volumes:
+  mongo_data:
+    name: lms_mongo_data
+
+# ── Networks ───────────────────────────────────────────────────────────────────
+networks:
+  lms-network:
+    name: lms-network
+    driver: bridge

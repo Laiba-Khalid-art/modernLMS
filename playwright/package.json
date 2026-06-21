@@ -1,0 +1,21 @@
+{
+  "name": "library-playwright-tests",
+  "version": "1.0.0",
+  "description": "Playwright E2E Test Framework for Library Management System",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:auth": "playwright test tests/auth.spec.js",
+    "test:books": "playwright test tests/books.spec.js",
+    "test:students": "playwright test tests/students.spec.js",
+    "test:issue": "playwright test tests/issue.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.1"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "modern-library-management-system",
+  "version": "1.0.0",
+  "description": "Re-engineered College Library Management System - Modern Full-Stack Web Application",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../playwright && npm install",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
+    "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm run preview\"",
+    "test": "cd playwright && npm test",
+    "migrate": "node migration/migrate.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.18.0",
+    "mongoose": "^9.7.1"
+  }
+}
