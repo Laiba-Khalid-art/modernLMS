@@ -18,7 +18,7 @@ const Student = require('../models/Student');
 const IssuedBook = require('../models/IssuedBook');
 const User = require('../models/User');
 
-const CSV_DIR = path.join(__dirname, '../../');
+const CSV_DIR = path.join(__dirname, '../');
 
 function parseCSV(filePath) {
   if (!fs.existsSync(filePath)) {
