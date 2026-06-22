@@ -3,9 +3,12 @@
  * Migrates legacy C++ CSV data into MongoDB collections
  * Run: node migration/migrate.js
  */
-require('dotenv').config({
-  path: require('path').join(__dirname, '../.env')
-});
+require('dotenv').config();
+
+if (!process.env.MONGODB_URI) {
+  console.error('ERROR: MONGODB_URI environment variable is not set');
+  process.exit(1);
+}
 
 const FORCE = process.argv.includes('--force');
 
@@ -136,8 +139,6 @@ async function run() {
 
   } catch (err) {
     console.error('Migration failed:', err);
-  } finally {
-    await mongoose.disconnect();
   }
 }
 run();
