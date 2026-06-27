@@ -136,12 +136,12 @@ export default function StudentsPage() {
                             style={{ background: 'linear-gradient(135deg, #7c3aed, #4f46e5)' }}>
                             {s.name[0].toUpperCase()}
                           </div>
-                          <span className="font-semibold text-slate-900">{s.name}</span>
+                          <span className="font-semibold text-white">{s.name}</span>
                         </div>
                       </td>
                       <td className="td"><span className="badge-blue">{s.department}</span></td>
-                      <td className="td text-slate-500">{s.email || '—'}</td>
-                      <td className="td text-slate-500">{s.contactNumber || '—'}</td>
+                      <td className="td text-slate-400">{s.email || '—'}</td>
+                      <td className="td text-slate-400">{s.contactNumber || '—'}</td>
                       <td className="td">
                         <div className="flex items-center gap-1">
                           <button onClick={() => openHistory(s)}
@@ -192,7 +192,7 @@ export default function StudentsPage() {
             <input value={form.contactNumber} onChange={e => setField('contactNumber', e.target.value)}
               placeholder="03001234567" className="input-field" data-testid="student-contact-input" />
           </div>
-          <div className="flex gap-3 pt-2 justify-end border-t border-slate-100">
+          <div className="flex gap-3 pt-2 justify-end border-t" style={{ borderColor: 'rgba(201,168,76,0.1)' }}>
             <button type="button" onClick={() => setShowModal(false)} className="btn-secondary">Cancel</button>
             <button type="submit" className="btn-primary" disabled={saving} data-testid="save-student-btn">
               {saving ? 'Saving…' : editStudent ? 'Update Student' : 'Register Student'}
@@ -219,10 +219,10 @@ export default function StudentsPage() {
                   <tr><td colSpan="6" className="text-center py-10 text-slate-400">No borrow history found.</td></tr>
                 ) : history.map(h => (
                   <tr key={h._id} className="tr-divider">
-                    <td className="td font-medium text-slate-900">{h.bookId?.title || '—'}</td>
-                    <td className="td text-slate-500">{fmt(h.issueDate)}</td>
-                    <td className="td text-slate-500">{fmt(h.dueDate)}</td>
-                    <td className="td text-slate-500">{fmt(h.returnDate)}</td>
+                    <td className="td font-medium text-white">{h.bookId?.title || '—'}</td>
+                    <td className="td text-slate-400">{fmt(h.issueDate)}</td>
+                    <td className="td text-slate-400">{fmt(h.dueDate)}</td>
+                    <td className="td text-slate-400">{fmt(h.returnDate)}</td>
                     <td className="td">
                       {h.status === 'Returned'
                         ? <span className="badge-green"><FiCheckCircle size={9} /> Returned</span>

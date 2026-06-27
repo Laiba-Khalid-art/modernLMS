@@ -138,9 +138,9 @@ export default function BooksPage() {
                     <tr key={book._id} className="tr-hover tr-divider">
                       <td className="td font-mono text-xs text-slate-400">#{book.bookId}</td>
                       <td className="td">
-                        <p className="font-semibold text-slate-900 max-w-[180px] truncate">{book.title}</p>
+                        <p className="font-semibold text-white max-w-[180px] truncate">{book.title}</p>
                       </td>
-                      <td className="td text-slate-600">{book.author}</td>
+                      <td className="td text-slate-400">{book.author}</td>
                       <td className="td"><span className="badge-purple">{book.category}</span></td>
                       <td className="td font-medium">{book.quantity}</td>
                       <td className="td font-medium">{book.availableCopies}</td>
@@ -188,7 +188,7 @@ export default function BooksPage() {
           <FormField label="Quantity *" name="quantity" type="number" placeholder="5" min="1"
             value={form.quantity} onChange={setField} testId="book-quantity-input" />
 
-          <div className="flex gap-3 pt-2 justify-end border-t border-slate-100 mt-2">
+          <div className="flex gap-3 pt-2 justify-end border-t mt-2" style={{ borderColor: 'rgba(201,168,76,0.1)' }}>
             <button type="button" onClick={() => setShowModal(false)} className="btn-secondary">Cancel</button>
             <button type="submit" className="btn-primary" disabled={saving} data-testid="save-book-btn">
               {saving ? 'Saving…' : editBook ? 'Update Book' : 'Add Book'}
